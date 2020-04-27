@@ -36,5 +36,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     USERNAME_FIELD = 'Email'
 
+    @property
+    def is_active(self):
+        "Is the user active?"
+        return self.IsActive
 
 
