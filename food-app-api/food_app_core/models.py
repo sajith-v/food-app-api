@@ -5,21 +5,25 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 class UserManager(BaseUserManager):
 
-    def create_user(self, firstname, lastname, email, password, **otherFields):
-        if not email:
+    def create_user(self,FirstName,LastName,Email, password, **otherFields):
+        if not Email:
             raise ValueError('email is required')
-        if not firstname:
+        if not FirstName:
             raise ValueError('first name is required')
-        if not lastname:
+        if not LastName:
             raise ValueError('last name is required')
 
-        user = User(FirstName=firstname, LastName=lastname, Email= self.normalize_email(email),**otherFields)
+        user = User(FirstName=FirstName, LastName=LastName, Email= self.normalize_email(Email),**otherFields)
         user.set_password(password)
         user.save(using=self._db)
         return user;
 
-    def create_superuser(self, firstname, lastname, email, password, **otherFields):
-        user = self.create_user(firstname,lastname,email,password)
+    def create_superuser(self,Email, password, firstname = None, lastname = None, **otherFields):
+        if not firstname:
+            firstname = Email
+        if not lastname:
+            lastname = Email
+        user = self.create_user(firstname,lastname,Email,password)
         user.is_superuser = True
         user.save(using=self._db)
         return user;
@@ -40,5 +44,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     def is_active(self):
         "Is the user active?"
         return self.IsActive
+
+    @property
+    def email(self):
+        return self.Email
+
+
 
 

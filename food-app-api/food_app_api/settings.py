@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'food_app_core'
+    'rest_framework',
+    'rest_framework.authtoken',
+    'food_app_core',
+    'food_app_user'
 ]
 
 # Middleware framework

@@ -9,10 +9,10 @@ class ModelTests(TestCase):
         firstname = 'adam'
         lastname = 'peter'
         user = get_user_model().objects.create_user(
-            firstname = firstname,
-            lastname = lastname,
-            email = email,
-            password =password
+            firstname,
+            lastname,
+            email,
+            password
         )
         self.assertEqual(user.Email,email)
         self.assertTrue(user.check_password(password))
@@ -21,9 +21,9 @@ class ModelTests(TestCase):
     def test_on_empty_email_address_registration_failed(self):
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user(
-                firstname = 'adam',
-                lastname = 'john',
-                email = None,
+                'adam',
+                'john',
+                Email = None,
                 password = '123444'
             )
     
@@ -33,10 +33,10 @@ class ModelTests(TestCase):
         password = 'TestPass123'
         firstname = 'adam'
         lastname = 'peter'
-        user = get_user_model().objects.create_superuser(
-            firstname = firstname,
+        user = get_user_model().objects.create_superuser(          
+            Email = email,
+            password =password,
+             firstname = firstname,
             lastname = lastname,
-            email = email,
-            password =password
         )
         self.assertTrue(user.is_superuser)
